@@ -16,6 +16,6 @@ class IndexController extends AbstractController
     {
         $bus->dispatch(new MailMessage(rand(1, 100), 'login', 'tr', 'furkan.aydin@gmail.com'), [new DelayStamp('60000')]);
 
-        return new Response('Okey');
+        return new Response('Message Sent');
     }
 }
