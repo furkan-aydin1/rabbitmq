@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nginx:
-    container_name: poject-nginx
+    container_name: project-nginx
     build: docker/nginx
     working_dir: /var/www/app
     ports:
@@ -19,6 +19,20 @@ services:
     working_dir: /var/www/app
     volumes:
       - ./:/var/www/app
+    networks:
+      - project-network
+
+  rabbitmq:
+    container_name: project-rabbitmq
+    build:
+      context: docker/rabbitmq
+    restart: on-failure
+    ports:
+      - "5673:5672"
+      - "15787:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=test
+      - RABBITMQ_DEFAULT_PASS=test
     networks:
       - project-network
 
